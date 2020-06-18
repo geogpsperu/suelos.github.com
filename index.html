@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <style>
+        #map {
+            width: 530px;
+            height: 580px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="data/MapadeSuelos_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-19.069560226601407,-84.2952492618466],[0.7380785273950347,-65.37502173429708]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        map.createPane('pane_GoogleSatellite_1');
+        map.getPane('pane_GoogleSatellite_1').style.zIndex = 401;
+        var layer_GoogleSatellite_1 = L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_1',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleSatellite_1;
+        map.addLayer(layer_GoogleSatellite_1);
+        function pop_MapadeSuelos_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Símbolo</th>\
+                        <td>' + (feature.properties['SIMSUE'] !== null ? autolinker.link(feature.properties['SIMSUE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Descripción</th>\
+                        <td>' + (feature.properties['DESCRIPCIO'] !== null ? autolinker.link(feature.properties['DESCRIPCIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Paisaje</th>\
+                        <td>' + (feature.properties['PAISAJE'] !== null ? autolinker.link(feature.properties['PAISAJE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Contacto</th>\
+                        <td>' + (feature.properties['contacto'] !== null ? autolinker.link(feature.properties['contacto'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Web</th>\
+                        <td>' + (feature.properties['descargar'] !== null ? autolinker.link(feature.properties['descargar'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">WhatsApp</th>\
+                        <td>' + (feature.properties['whatsapp'] !== null ? autolinker.link(feature.properties['whatsapp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MapadeSuelos_2_0(feature) {
+            switch(String(feature.properties['SIMSUE'])) {
+                case 'ACh-ALh-LVx':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'ACh-ALh-LXh':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(220,43,36,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'ARh-SCh':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,62,45,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'CMd-ACh':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,81,54,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'CMd-ACh-LXh':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,99,62,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'CMd-ALh':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(239,118,71,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'CMd-NTh':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(244,137,80,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'CMe-PHh':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,155,88,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'CMe-VRe':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,174,97,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'FLe-GLe':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,184,109,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'FLe-RGe':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,195,120,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'GLd-CMd':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,205,132,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'GLd-HSf':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,215,144,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'GLd-LXh-FLd':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,225,156,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'LPd-ANu-R':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,235,168,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'LPd-ANz':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,179,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'LPd-CMd-RGd':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,191,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'LPd-R':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(245,251,188,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'LPd-RGd-R':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,247,184,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'LPe-CMe':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,243,181,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'LPe-CMe-RGe':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,238,178,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'LPe-KSh-R':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(203,234,174,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'LPe-R':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(192,230,171,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'LPe-RGe-R':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,226,168,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'LPq-R':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(171,221,164,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'LVx-CMe':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(155,210,167,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'LXh-GLd':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(139,199,170,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'RGd-CMd':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,187,172,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'RGd-R':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,176,175,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'RGe-ANm':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(91,165,178,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'RGe-CLh':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(75,154,181,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'RGe-CMe':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(59,142,183,0.652)',
+                interactive: true,
+            }
+                    break;
+                case 'SCh-LPe':
+                    return {
+                pane: 'pane_MapadeSuelos_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.652)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,0.652)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_MapadeSuelos_2');
+        map.getPane('pane_MapadeSuelos_2').style.zIndex = 402;
+        map.getPane('pane_MapadeSuelos_2').style['mix-blend-mode'] = 'normal';
+        var layer_MapadeSuelos_2 = new L.geoJson(json_MapadeSuelos_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MapadeSuelos_2',
+            layerName: 'layer_MapadeSuelos_2',
+            pane: 'pane_MapadeSuelos_2',
+            onEachFeature: pop_MapadeSuelos_2,
+            style: style_MapadeSuelos_2_0,
+        });
+        bounds_group.addLayer(layer_MapadeSuelos_2);
+        map.addLayer(layer_MapadeSuelos_2);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Mapa de Suelos<br /><table><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_AChALhLVx0.png" /></td><td>ACh-ALh-LVx</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_AChALhLXh1.png" /></td><td>ACh-ALh-LXh</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_ARhSCh2.png" /></td><td>ARh-SCh</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_CMdACh3.png" /></td><td>CMd-ACh</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_CMdAChLXh4.png" /></td><td>CMd-ACh-LXh</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_CMdALh5.png" /></td><td>CMd-ALh</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_CMdNTh6.png" /></td><td>CMd-NTh</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_CMePHh7.png" /></td><td>CMe-PHh</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_CMeVRe8.png" /></td><td>CMe-VRe</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_FLeGLe9.png" /></td><td>FLe-GLe</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_FLeRGe10.png" /></td><td>FLe-RGe</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_GLdCMd11.png" /></td><td>GLd-CMd</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_GLdHSf12.png" /></td><td>GLd-HSf</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_GLdLXhFLd13.png" /></td><td>GLd-LXh-FLd</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_LPdANuR14.png" /></td><td>LPd-ANu-R</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_LPdANz15.png" /></td><td>LPd-ANz</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_LPdCMdRGd16.png" /></td><td>LPd-CMd-RGd</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_LPdR17.png" /></td><td>LPd-R</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_LPdRGdR18.png" /></td><td>LPd-RGd-R</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_LPeCMe19.png" /></td><td>LPe-CMe</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_LPeCMeRGe20.png" /></td><td>LPe-CMe-RGe</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_LPeKShR21.png" /></td><td>LPe-KSh-R</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_LPeR22.png" /></td><td>LPe-R</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_LPeRGeR23.png" /></td><td>LPe-RGe-R</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_LPqR24.png" /></td><td>LPq-R</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_LVxCMe25.png" /></td><td>LVx-CMe</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_LXhGLd26.png" /></td><td>LXh-GLd</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_RGdCMd27.png" /></td><td>RGd-CMd</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_RGdR28.png" /></td><td>RGd-R</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_RGeANm29.png" /></td><td>RGe-ANm</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_RGeCLh30.png" /></td><td>RGe-CLh</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_RGeCMe31.png" /></td><td>RGe-CMe</td></tr><tr><td style="text-align: center;"><img src="legend/MapadeSuelos_2_SChLPe32.png" /></td><td>SCh-LPe</td></tr></table>': layer_MapadeSuelos_2,"Google Satellite": layer_GoogleSatellite_1,"Google Satellite": layer_GoogleSatellite_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
